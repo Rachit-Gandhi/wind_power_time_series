@@ -8,10 +8,8 @@ from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
 import os
 
-def y_data_analyse():
-    path_name = input('Please enter the full path to the file:')
+def y_data_analyse(path_name, file_name):
     csv_name = path_name
-    file_name = input('Please enter the name you want the file to be saved as:')
 
     csv_params = {'skiprows':9} # This part is copied from data provider check references
     data_20 = pd.read_csv(csv_name,**csv_params)
