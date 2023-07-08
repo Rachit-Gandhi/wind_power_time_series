@@ -1,8 +1,8 @@
 import y_data_preprocess as y_data
 import os
 
-directory = input('Please enter the folder')  # Replace with the actual directory path
-year_repo = input('Please enter the year')
+directory = input('Please enter the folder:')  # Replace with the actual directory path
+year_repo = input('Please enter the year:')
 # List all files in the directory
 files = os.listdir(directory)
 
