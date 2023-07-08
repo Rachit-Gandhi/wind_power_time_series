@@ -6,6 +6,7 @@ from datetime import datetime
 from sklearn.metrics import mean_absolute_percentage_error
 from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
+import os
 
 def y_data_analyse():
     path_name = input('Please enter the full path to the file:')
@@ -47,4 +48,15 @@ def y_data_analyse():
     data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
 
     profile = ProfileReport(data_20[use_columns])
+    # Specify the file name and directory path
+    directory_path = "reports"
+
+    # Create the directory if it doesn't exist
+    os.makedirs(directory_path, exist_ok=True)
+
+    # Generate the file path
+    file_path = os.path.join(directory_path, f"{file_name}.html")
+
+    # Save the file in the specified directory
+    profile.to_file(file_path)
     profile.to_file(f"{file_name}.html")
