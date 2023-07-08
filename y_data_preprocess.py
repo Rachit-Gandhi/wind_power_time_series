@@ -57,4 +57,3 @@ def y_data_analyse(path_name, file_name):
 
     # Save the file in the specified directory
     profile.to_file(file_path)
-    profile.to_file(f"{file_name}.html")
