@@ -8,24 +8,9 @@ from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
 import os
 
-def file_feed():
-    directory = '' # Replace with the actual directory path
-    #year_repo = ''
-    # List all files in the directory
-    files = os.listdir(directory)
+  
 
-    # Filter CSV files with names starting with 'Kelmarsh'
-    csv_files = [file for file in files if file.endswith('.csv') and file.startswith('Turbine')]
-
-    
-
-def data_process(path_name, file_name):
-    csv_name = path_name
-
-    csv_params = {'skiprows':9} # This part is copied from data provider check references
-    data_20 = pd.read_csv(csv_name,**csv_params)
-
-
+def data_process(data_20):
     #By previous analysis and not to overload the ydata_profiling method, the method to take mean of these highly correlated fields made sense
     blade_angles = ['Blade angle (pitch position) A (°)', 'Blade angle (pitch position) B (°)', 'Blade angle (pitch position) C (°)']
     data_20['blade_angle'] = data_20[blade_angles].mean(axis=1)
@@ -57,3 +42,4 @@ def data_process(path_name, file_name):
             
     
     data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
+    return(data_20)
