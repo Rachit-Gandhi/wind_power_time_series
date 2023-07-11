@@ -6,9 +6,21 @@ from datetime import datetime
 from sklearn.metrics import mean_absolute_percentage_error
 from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
+import os=import y_data_preprocess as y_data
 import os
 
-def y_data_analyse(path_name, file_name):
+def file_feed():
+    directory = '' # Replace with the actual directory path
+    year_repo = ''
+    # List all files in the directory
+    files = os.listdir(directory)
+
+    # Filter CSV files with names starting with 'Kelmarsh'
+    csv_files = [file for file in files if file.endswith('.csv') and file.startswith('Turbine')]
+
+    
+
+def data_process(path_name, file_name):
     csv_name = path_name
 
     csv_params = {'skiprows':9} # This part is copied from data provider check references
@@ -22,7 +34,7 @@ def y_data_analyse(path_name, file_name):
     # These variables feel most relevant to the problem
     use_columns = ['# Date and time','Power (kW)','Wind direction (°)','Nacelle position (°)','blade_angle','Rear bearing temperature (°C)',
                 'Rotor speed (RPM)','Generator RPM (RPM)','Nacelle ambient temperature (°C)',
-                'Front bearing temperature (°C)','Tower Acceleration X (mm/ss)','Wind speed (m/s)','Tower Acceleration y (mm/ss)','Metal particle count counter',]
+                'Front bearing temperature (°C)','Tower Acceleration X (mm/ss)','Wind speed (m/s)','Tower Acceleration y (mm/ss)','Metal particle count counter']
     # These variables listed below define the problem
     input_var = '# Date and time'
     output_var = 'Power (kW)'
@@ -44,16 +56,3 @@ def y_data_analyse(path_name, file_name):
         if col not in use_columns:
             notusecols.append(col)
     data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
-
-    profile = ProfileReport(data_20[use_columns])
-    # Specify the file name and directory path
-    directory_path = "reports"
-
-    # Create the directory if it doesn't exist
-    os.makedirs(directory_path, exist_ok=True)
-
-    # Generate the file path
-    file_path = os.path.join(directory_path, f"{file_name}.html")
-
-    # Save the file in the specified directory
-    profile.to_file(file_path)

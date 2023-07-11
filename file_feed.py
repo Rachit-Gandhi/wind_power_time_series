@@ -9,10 +9,11 @@ files = os.listdir(directory)
 # Filter CSV files with names starting with 'Kelmarsh'
 csv_files = [file for file in files if file.endswith('.csv') and file.startswith('Turbine')]
 
-# Print the list of CSV files
+# Print the report of all listed CSV files
 for file in csv_files:
     file_path = os.path.join(directory, file)
     report_nam = f"Report_{file[:24]}"
     report_name = f"{report_nam}_{year_repo}"
     y_data.y_data_analyse(file_path, report_name)
     print("Report Published")
+
