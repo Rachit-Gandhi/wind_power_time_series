@@ -8,18 +8,7 @@ from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
 import os
 
-def file_feed():
-    directory = '' # Replace with the actual directory path
-    #year_repo = ''
-    # List all files in the directory
-    files = os.listdir(directory)
-
-    # Filter CSV files with names starting with 'Kelmarsh'
-    csv_files = [file for file in files if file.endswith('.csv') and file.startswith('Turbine')]
-
-    
-
-def data_process(path_name, file_name):
+def y_data_analyse(path_name, file_name):
     csv_name = path_name
 
     csv_params = {'skiprows':9} # This part is copied from data provider check references
@@ -54,6 +43,17 @@ def data_process(path_name, file_name):
     for col in data_20.columns:
         if col not in use_columns:
             notusecols.append(col)
-            
-    
     data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
+
+    profile = ProfileReport(data_20[use_columns])
+    # Specify the file name and directory path
+    directory_path = "reports"
+
+    # Create the directory if it doesn't exist
+    os.makedirs(directory_path, exist_ok=True)
+
+    # Generate the file path
+    file_path = os.path.join(directory_path, f"{file_name}.html")
+
+    # Save the file in the specified directory
+    profile.to_file(file_path)
