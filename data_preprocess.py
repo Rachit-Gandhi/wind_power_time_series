@@ -7,6 +7,7 @@ from sklearn.metrics import mean_absolute_percentage_error
 from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
 import os
+from sklearn.preprocessing import MinMaxScaler
 
   
 
@@ -44,4 +45,20 @@ def data_process(data_20):
     
     data_20_final = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
     
+       
+    # Output the normalized DataFrame
+    return(data_20_final)
+
+def normalize_all(data_20_final):
+    columns_to_normalize = ['Power (kW)', 'Wind direction (°)', 'Nacelle position (°)', 'blade_angle',
+                            'Rear bearing temperature (°C)', 'Rotor speed (RPM)', 'Generator RPM (RPM)',
+                            'Nacelle ambient temperature (°C)', 'Front bearing temperature (°C)',
+                            'Tower Acceleration X (mm/ss)', 'Wind speed (m/s)', 'Tower Acceleration y (mm/ss)',
+                            'Metal particle count counter']
+
+    # Create a MinMaxScaler instance
+    scaler = MinMaxScaler()
+
+    # Normalize the selected columns
+    data_20_final[columns_to_normalize] = scaler.fit_transform(data_20_final[columns_to_normalize])
     return(data_20_final)
