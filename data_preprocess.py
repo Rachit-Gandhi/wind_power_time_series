@@ -36,10 +36,12 @@ def data_process(data_20):
 
     # drop all the columns except those in usecolumns
     notusecols=[]
+    
     for col in data_20.columns:
         if col not in use_columns:
             notusecols.append(col)
             
     
-    data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
-    return(data_20)
+    data_20_final = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
+    
+    return(data_20_final)
