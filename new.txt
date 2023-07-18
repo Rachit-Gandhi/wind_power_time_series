@@ -1,7 +1,0 @@
-
-import matplotlib.pyplot as plt
-for col_temp in col_temps:
-    plt.plot(df.iloc[:, 0], df[col_temp], label=col_temp)
-    plt.legend()
-    plt.show
-    time.sleep(100)
