@@ -1,0 +1,61 @@
+attrs>=21.2.0
+deprecated>=1.2.12
+importlib_metadata; python_version < '3.8'
+matplotlib>=2.0.0
+numpy>=1.21,<1.22
+pandas>=1.0.4,<=1.3.5
+packaging<22
+python-dateutil>=2.8.0
+scikit-learn>=0.24.2
+scipy<1.8.0
+seaborn>=0.11.1
+setuptools-git>=1.2
+statsmodels==0.12.2
+lightgbm>=2.3.0
+numba>=0.55.0
+typing-extensions; python_version < '3.8'
+Start
+Index(['index', '# Date and time', 'Wind speed (m/s)', 'Wind direction (°)',
+       'Nacelle position (°)', 'Power (kW)', 'Front bearing temperature (°C)',
+       'Rear bearing temperature (°C)', 'Nacelle ambient temperature (°C)',
+       'Rotor speed (RPM)', 'Generator RPM (RPM)',
+       'Metal particle count counter', 'Tower Acceleration X (mm/ss)',
+       'Tower Acceleration y (mm/ss)', 'blade_angle',
+       'Wind direction (°)_lagged_1', 'Wind direction (°)_lagged_2',
+       'Wind direction (°)_lagged_3', 'Wind direction (°)_lagged_4',
+       'Wind direction (°)_lagged_5', 'Rear bearing temperature (°C)_lagged_1',
+       'Rear bearing temperature (°C)_lagged_2',
+       'Rear bearing temperature (°C)_lagged_3',
+       'Rear bearing temperature (°C)_lagged_4',
+       'Rear bearing temperature (°C)_lagged_5', 'Rotor speed (RPM)_lagged_1',
+       'Rotor speed (RPM)_lagged_2', 'Rotor speed (RPM)_lagged_3',
+       'Rotor speed (RPM)_lagged_4', 'Rotor speed (RPM)_lagged_5',
+       'Generator RPM (RPM)_lagged_1', 'Generator RPM (RPM)_lagged_2',
+       'Generator RPM (RPM)_lagged_3', 'Generator RPM (RPM)_lagged_4',
+       'Generator RPM (RPM)_lagged_5',
+       'Front bearing temperature (°C)_lagged_1',
+       'Front bearing temperature (°C)_lagged_2',
+       'Front bearing temperature (°C)_lagged_3',
+       'Front bearing temperature (°C)_lagged_4',
+       'Front bearing temperature (°C)_lagged_5',
+       'Tower Acceleration X (mm/ss)_lagged_1',
+       'Tower Acceleration X (mm/ss)_lagged_2',
+       'Tower Acceleration X (mm/ss)_lagged_3',
+       'Tower Acceleration X (mm/ss)_lagged_4',
+       'Tower Acceleration X (mm/ss)_lagged_5', 'Wind speed (m/s)_lagged_1',
+       'Wind speed (m/s)_lagged_2', 'Wind speed (m/s)_lagged_3',
+       'Wind speed (m/s)_lagged_4', 'Wind speed (m/s)_lagged_5',
+       'Tower Acceleration y (mm/ss)_lagged_1',
+       'Tower Acceleration y (mm/ss)_lagged_2',
+       'Tower Acceleration y (mm/ss)_lagged_3',
+       'Tower Acceleration y (mm/ss)_lagged_4',
+       'Tower Acceleration y (mm/ss)_lagged_5',
+       'Metal particle count counter_lagged_1',
+       'Metal particle count counter_lagged_2',
+       'Metal particle count counter_lagged_3',
+       'Metal particle count counter_lagged_4',
+       'Metal particle count counter_lagged_5', 'blade_angle_diff',
+       'Nacelle ambient temperature (°C)_diff',
+       'Tower Acceleration X (mm/ss)_diff',
+       'Tower Acceleration y (mm/ss)_diff'],
+      dtype='object')
