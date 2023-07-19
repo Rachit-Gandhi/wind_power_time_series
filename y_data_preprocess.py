@@ -7,11 +7,14 @@ from sklearn.metrics import mean_absolute_percentage_error
 from catboost import CatBoostRegressor
 from ydata_profiling import ProfileReport
 import os
-from sklearn.preprocessing import MinMaxScaler
 
-  
+def y_data_analyse(path_name, file_name):
+    csv_name = path_name
 
-def data_process(data_20):
+    csv_params = {'skiprows':9} # This part is copied from data provider check references
+    data_20 = pd.read_csv(csv_name,**csv_params)
+
+
     #By previous analysis and not to overload the ydata_profiling method, the method to take mean of these highly correlated fields made sense
     blade_angles = ['Blade angle (pitch position) A (°)', 'Blade angle (pitch position) B (°)', 'Blade angle (pitch position) C (°)']
     data_20['blade_angle'] = data_20[blade_angles].mean(axis=1)
@@ -37,27 +40,20 @@ def data_process(data_20):
 
     # drop all the columns except those in usecolumns
     notusecols=[]
-    
     for col in data_20.columns:
         if col not in use_columns:
             notusecols.append(col)
-            
-    
-    data_20_final = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
-    
-       
-    # Output the normalized DataFrame
-    return(data_20_final)
+    data_20 = data_20.drop(columns=[col for col in data_20.columns if col not in use_columns])
 
-def normalize_all(data_20_final):
+    profile = ProfileReport(data_20[use_columns])
+    # Specify the file name and directory path
+    directory_path = "reports"
 
-    columns_to_normalize = []
-    columns_to_normalize = data_20_final.columns
-    columns_to_normalize = [col for col in columns_to_normalize if col != '# Date and time']
-    data_20_final_numeric = data_20_final[columns_to_normalize].select_dtypes(include='int')
-    # Create a MinMaxScaler instance
-    scaler = MinMaxScaler()
+    # Create the directory if it doesn't exist
+    os.makedirs(directory_path, exist_ok=True)
 
-    # Normalize the selected columns
-    data_20_final_numeric[columns_to_normalize] = scaler.fit_transform(data_20_final_numeric)
-    return(data_20_final_numeric)
+    # Generate the file path
+    file_path = os.path.join(directory_path, f"{file_name}.html")
+
+    # Save the file in the specified directory
+    profile.to_file(file_path)
