@@ -53,12 +53,11 @@ def normalize_all(data_20_final):
 
     columns_to_normalize = []
     columns_to_normalize = data_20_final.columns
-    columns_to_normalize = [col for col in columns_to_normalize if col != '# Date and time']
-    print(columns_to_normalize)
-    
+    while '# Date and time' in columns_to_normalize:
+        columns_to_normalize.remove('# Date and time')
     # Create a MinMaxScaler instance
     scaler = MinMaxScaler()
 
     # Normalize the selected columns
-    data_20_final[columns_to_normalize] = scaler.fit_transform(data_20_final)
+    data_20_final[columns_to_normalize] = scaler.fit_transform(data_20_final[columns_to_normalize])
     return(data_20_final)
