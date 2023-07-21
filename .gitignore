@@ -1,3 +1,6 @@
 data/
 input_data.csv
 turbine1_df_final.pkl
+train.pkl
+test.pkl
+val.pkl
