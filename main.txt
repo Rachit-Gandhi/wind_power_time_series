@@ -1,0 +1,91 @@
+import matplotlib.pyplot as plt
+
+# Retrain the model using the best hyperparameters found during the search
+best_model = StackedLSTMWithAttention(input_size, best_hyperparameters['hidden_size'],
+                                      best_hyperparameters['num_layers'],
+                                      attention_size, output_size)
+criterion = nn.MSELoss()
+optimizer = optim.Adam(best_model.parameters(), lr=best_hyperparameters['lr'])
+
+train_losses = []  # Store training losses for plotting
+valid_losses = []  # Store validation losses for plotting
+
+num_epochs = 50
+for epoch in range(num_epochs):
+    best_model.train()
+    for batch_idx, (data, target) in enumerate(train_loader):
+        # Reshape data to (batch_size, sequence_length, input_size)
+        data = data.view(-1, 526, 64)
+
+        # Forward pass
+        outputs = best_model(data)
+
+        # Flatten the predictions and targets for loss calculation
+        outputs = outputs.view(-1)
+        target = target.view(-1)
+
+        # Compute the loss
+        loss = criterion(outputs, target)
+
+        # Backpropagation and optimization
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
+
+        # Store the training loss
+        train_losses.append(loss.item())
+
+        # Print batch loss
+        if batch_idx % 10 == 0:
+            print(f"Epoch [{epoch}/{num_epochs}], Batch [{batch_idx}/{len(train_loader)}], Loss: {loss.item()}")
+
+    # Validation loop
+    best_model.eval()
+    with torch.no_grad():
+        total_loss = 0
+        for data, target in valid_loader:
+            # Reshape data to (batch_size, sequence_length, input_size)
+            data = data.view(-1, 526, 64)
+
+            outputs = best_model(data)
+            outputs = outputs.view(-1)
+            target = target.view(-1)
+
+            loss = criterion(outputs, target)
+            total_loss += loss.item()
+
+        average_loss = total_loss / len(valid_loader)
+        valid_losses.append(average_loss)
+
+        print(f"Epoch [{epoch}/{num_epochs}], Validation Loss: {average_loss}")
+
+# Plot the training and validation losses over epochs
+plt.figure(figsize=(8, 6))
+plt.plot(train_losses, label='Training Loss')
+plt.plot(valid_losses, label='Validation Loss')
+plt.xlabel('Epoch')
+plt.ylabel('Loss')
+plt.title('Training and Validation Loss')
+plt.legend()
+plt.show()
+
+# Visualize the model predictions against true target values
+best_model.eval()
+with torch.no_grad():
+    for data, target in valid_loader:
+        # Reshape data to (batch_size, sequence_length, input_size)
+        data = data.view(-1, 526, 64)
+
+        outputs = best_model(data)
+        predicted_values = outputs.view(-1).cpu().numpy()
+        true_values = target.view(-1).cpu().numpy()
+
+        plt.figure(figsize=(8, 6))
+        plt.plot(true_values, label='True Values')
+        plt.plot(predicted_values, label='Predicted Values')
+        plt.xlabel('Sample Index')
+        plt.ylabel('Value')
+        plt.title('True vs. Predicted Values')
+        plt.legend()
+        plt.show()
+        break  # Only visualize the first batch of data from the validation loader
