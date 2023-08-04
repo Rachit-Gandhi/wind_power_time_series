@@ -4,3 +4,5 @@ turbine1_df_final.pkl
 train.pkl
 test.pkl
 val.pkl
+output_plots/
+final_output/
