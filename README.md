@@ -27,5 +27,12 @@ Now expanding on each folders here:
 This has 2 txt files and a png, the png gives feature importance updation persteps by TabNet, as txt files mention on their title each has the numerical masks for feature importance.
 
 # one-shout-outputs
+best_predict.png gives best possible output others can be ignored
+
+# py_files
+All Jupyter Notebooks have corresponding py files,
+* data_preprocess.py is important and has 2 functions, one that selects features and other normalises all columns
+* y_data_preprocess generates y_data_profiling reports, be careful of the feeded data, as there is a limit on processing
+
 
 
