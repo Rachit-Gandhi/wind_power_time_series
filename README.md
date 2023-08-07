@@ -2,11 +2,12 @@
 Project under summer internship at KPMG 2023 under Management Advisory at Industry 4.0 Team
 So below is a guide to use below repo!
 
-We have divided the main repo btw 4 folders:
+We have divided the main repo btw 5 folders:
 1. jupyter_notebooks
 2. masks
 3. one-shot-outputs
 4. py_files
+5. support_files
 
 We have "tabnet_model_test_1.zip" which is a pretrained tabnet_regression model to use here.
 
