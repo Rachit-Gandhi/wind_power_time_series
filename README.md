@@ -27,12 +27,16 @@ Now expanding on each folders here:
 This has 2 txt files and a png, the png gives feature importance updation persteps by TabNet, as txt files mention on their title each has the numerical masks for feature importance.
 
 # one-shout-outputs
-best_predict.png gives best possible output others can be ignored
+best_predict.png gives best possible output others can be ignored.
 
 # py_files
 All Jupyter Notebooks have corresponding py files,
-* data_preprocess.py is important and has 2 functions, one that selects features and other normalises all columns
-* y_data_preprocess generates y_data_profiling reports, be careful of the feeded data, as there is a limit on processing
+* data_preprocess.py is important and has 2 functions, one that selects features and other normalises all columns.
+* y_data_preprocess generates y_data_profiling reports, be careful of the feeded data, as there is a limit on processing.
 
-
+# support_files
+* Data_Understanding_borrowed.ipynb gives a good understanding of Dataset.
+* WhatsApp video file is a good visualisation for the generalisation on test dataset.
+* Feature Engineering file is great guide for same.
+* Project Charter.
 
